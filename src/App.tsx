@@ -46,7 +46,7 @@ function App() {
         .toString()
         .padStart(2, "0")}`
     );
-  }, [time]);
+  }, [time, dispatch]);
 
   // таймер для подсчета слов в минуту
   React.useEffect(() => {
@@ -62,7 +62,7 @@ function App() {
   // выводит рандомное число для подбора текста и проверяет прошлый текст и нынешний, если
   // прошлый и новый совпадают, то новому прибавляется один и передается на апи
   const getRandomArbitrary = React.useCallback(
-    (min:number, max: number) => {
+    (min: number, max: number) => {
       let randomNumber = Math.floor(Math.random() * (max - min) + min);
 
       if (randomNumber === Number(lastIndex)) {
@@ -74,7 +74,7 @@ function App() {
       setLastIndex(random);
       return getData(randomNumber);
     },
-    [lastIndex]
+    [lastIndex, dispatch]
   );
 
   // запрос на апи
