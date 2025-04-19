@@ -28,10 +28,7 @@ function App() {
 
   const focusRef = React.useRef<HTMLDivElement>(null); // фокусирование на тексте при кнопке старт и заного
 
-  // запрос на апи
-  const getData = async (id: number) => {
-    dispatch(fetchText(id));
-  };
+  
 
   // при клике на кнопку заного сбрасывает все параметры
   const onClickAgain = () => {
@@ -61,7 +58,8 @@ function App() {
         .toString()
         .padStart(2, "0")}`
     );
-  }, [time, onClickAgain]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [time]);
 
   // таймер для подсчета слов в минуту
   React.useEffect(() => {
@@ -87,9 +85,10 @@ function App() {
 
       localStorage.setItem("lastIndex", JSON.stringify(random));
       setLastIndex(random);
-      return getData(randomNumber);
+
+      return dispatch(fetchText(randomNumber)); // запрос на апи
     },
-    [lastIndex, getData]
+    [lastIndex]
   );
 
   // focus text
