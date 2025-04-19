@@ -1,0 +1,155 @@
+@import "./index.scss";
+
+.container {
+  width: 700px;
+  height: max-content;
+  border-radius: 20px;
+  background-color: #bedeea;
+  padding: 40px;
+
+  @media (max-width: 830px) {
+    width: 500px;
+    padding: 30px;
+  }
+
+  @media (max-width: 585px) {
+    width: 400px;
+    padding: 25px;
+  }
+
+  @media (max-width: 470px) {
+    width: 300px;
+    padding: 10px 15px;
+  }
+
+  @media (max-width: 377px) {
+    width: 250px;
+    padding: 10px 15px;
+  }
+
+  .main-text {
+    max-width: fit-content;
+    font-size: 19px;
+    line-height: 1.7;
+    margin-right: 30px;
+    width: 70%;
+
+    @media (max-width: 585px) {
+      font-size: 16px;
+      margin-right: 20px;
+    }
+
+    @media (max-width: 377px) {
+      font-size: 13px;
+      margin-right: 10px;
+    }
+
+    .success-text {
+      color: #509c2a;
+    }
+
+    .success-char {
+      color: #fff;
+      background-color: #509c2a;
+      @include char;
+    }
+
+    .error-char {
+      color: #fff;
+      background-color: #b31313;
+      @include char;
+    }
+  }
+
+  .btn {
+    height: 100%;
+    @include display;
+
+    .btn-start {
+      background-color: $bg-c;
+      border: none;
+      padding: 20px;
+      color: #fff;
+      font-family: $ff;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      @media (max-width: 585px) {
+        font-size: 15px;
+        padding: 15px;
+      }
+
+      &:hover {
+        background-color: $bg-c_hover;
+      }
+    }
+  }
+
+  .side-right {
+    background-color: $bg-c;
+    padding: 20px 15px;
+    width: 30%;
+    border-radius: 20px;
+    @include dipl-column;
+    justify-content: space-between;
+    color: #fff;
+
+    @media (max-width: 585px) {
+      padding: 15px 10px;
+      gap: 10px;
+    }
+
+    .info {
+      @include dipl-column;
+      gap: 15px;
+
+      @media (max-width: 585px) {
+        gap: 10px;
+      }
+
+      .title {
+        font-size: 17px;
+        font-weight: 500;
+        margin-bottom: 5px;
+
+        @media (max-width: 585px) {
+          font-size: 15px;
+          margin-bottom: 3px;
+        }
+
+        @media (max-width: 470px) {
+          font-size: 13px;
+          margin-bottom: 2px;
+        }
+      }
+
+
+      .count {
+        font-size: 16px;
+
+        @media (max-width: 585px) {
+          font-size: 14px;
+        }
+
+        @media (max-width: 470px) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .again-btn{
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-family: $ff;
+      font-size: 14px;
+      cursor: pointer;
+
+      @media (max-width: 470px) {
+          font-size: 12px;
+        }
+    }
+  }
+}

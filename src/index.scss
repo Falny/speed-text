@@ -1,0 +1,38 @@
+@mixin char {
+  padding: 2px;
+  border-radius: 3px;
+  font-size: 22px;
+
+  @media (max-width: 585px){
+    font-size: 19px;
+  }
+}
+
+@mixin display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin dipl-column {
+  display: flex;
+  flex-direction: column;
+}
+
+$bg-c: #2c2e36;
+$bg-c_hover: #1b1d24;
+$ff: 'Inter', sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  user-select: none;
+}
+
+body {
+  background-color: $bg-c;
+  font-family: $ff;
+  height: 100vh;
+  @include display;
+}
