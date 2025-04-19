@@ -88,7 +88,7 @@ function App() {
 
       return dispatch(fetchText(randomNumber)); // запрос на апи
     },
-    [lastIndex]
+    [lastIndex, dispatch]
   );
 
   // focus text
