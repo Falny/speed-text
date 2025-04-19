@@ -12,16 +12,14 @@ function App() {
 
   const currentIndex = useSelector(
     (store: RootState) => store.textStore.currentIndex
-  );// отслеживать идекс при вводе пользователем
-  const error = useSelector((store: RootState) => store.textStore.error);// накопления ошибок
-  const isError = useSelector((store: RootState) => store.textStore.isError);// проверка на накопление ошибок флагом
-  const flagTime = useSelector((store: RootState) => store.textStore.flagTime);// флаг для таймера, чтобы начать и останавливать его
-  const text = useSelector((store: RootState) => store.textStore.text);// основной текст
-
+  ); // отслеживать идекс при вводе пользователем
+  const error = useSelector((store: RootState) => store.textStore.error); // накопления ошибок
+  const isError = useSelector((store: RootState) => store.textStore.isError); // проверка на накопление ошибок флагом
+  const flagTime = useSelector((store: RootState) => store.textStore.flagTime); // флаг для таймера, чтобы начать и останавливать его
+  const text = useSelector((store: RootState) => store.textStore.text); // основной текст
 
   const [time, setTime] = React.useState(0); // таймер для метрик
   const [timeRender, setTimeRender] = React.useState("00:00");
-
 
   const [lastIndex, setLastIndex] = React.useState<string | null>(() => {
     const getIndex = localStorage.getItem("lastIndex");
@@ -29,6 +27,23 @@ function App() {
   }); // проверка на повторный текст, сохранение в локальное хранилище для опять же проверки на прошлый текст
 
   const focusRef = React.useRef<HTMLDivElement>(null); // фокусирование на тексте при кнопке старт и заного
+
+  // запрос на апи
+  const getData = async (id: number) => {
+    dispatch(fetchText(id));
+  };
+
+  // при клике на кнопку заного сбрасывает все параметры
+  const onClickAgain = () => {
+    setTime(0);
+    dispatch(
+      setReset({
+        currentIndex: currentIndex,
+        error: error,
+        flagTime: flagTime,
+      })
+    );
+  };
 
   //установка таймера для пользователя, также расчет времени за час, то тогда вылетает alert и все сбрасывается
   React.useEffect(() => {
@@ -46,7 +61,7 @@ function App() {
         .toString()
         .padStart(2, "0")}`
     );
-  }, [time, dispatch]);
+  }, [time, onClickAgain]);
 
   // таймер для подсчета слов в минуту
   React.useEffect(() => {
@@ -74,13 +89,8 @@ function App() {
       setLastIndex(random);
       return getData(randomNumber);
     },
-    [lastIndex, dispatch]
+    [lastIndex, getData]
   );
-
-  // запрос на апи
-  const getData = async (id: number) => {
-    dispatch(fetchText(id));
-  };
 
   // focus text
   React.useEffect(() => {
@@ -98,20 +108,11 @@ function App() {
     );
   };
 
-  // при клике на кнопку заного сбрасывает все параметры
-  const onClickAgain = () => {
-    setTime(0);
-    dispatch(
-      setReset({
-        currentIndex: currentIndex,
-        error: error,
-        flagTime: flagTime,
-      })
-    );
-  };
-
   return (
-    <div className="container" style={{ display: text.length!==0 ? "flex" : "" }}>
+    <div
+      className="container"
+      style={{ display: text.length !== 0 ? "flex" : "" }}
+    >
       {text.length !== 0 && (
         <>
           <div
@@ -174,7 +175,10 @@ function App() {
 
       <div className="btn" style={{ height: "400px" }}>
         {text.length === 0 && (
-          <button onClick={() => getRandomArbitrary(1, 4)} className="btn-start">
+          <button
+            onClick={() => getRandomArbitrary(1, 4)}
+            className="btn-start"
+          >
             Start
           </button>
         )}
